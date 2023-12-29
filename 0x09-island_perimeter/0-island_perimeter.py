@@ -1,3 +1,8 @@
+#!/usr/bin/python3
+"""Island Perimeter
+"""
+
+
 def island_perimeter(grid):
     """returns the perimeter of the island described in grid
 
@@ -7,22 +12,20 @@ def island_perimeter(grid):
     """
 
     perimeter = 0
+    rows, cols = len(grid), len(grid[0]) if grid else 0
 
-    # Loop through each row and cell in the grid
-    for i, row in enumerate(grid):
-        for j, cell in enumerate(row):
-            if cell == 1:  # If it's land
+    # Loop through each row of the grid
+    for i in range(rows):
+        # Loop through each cell in the row
+        for j in range(cols):
+            if grid[i][j] == 1:  # If it's land
                 perimeter += 4  # Count all four sides
 
                 # Check if there's land in the adjacent cells
                 # Subtract 1 for each adjacent land cell
-                if j > 0 and row[j - 1] == 1:
-                    perimeter -= 1
-                if j < len(row) - 1 and row[j + 1] == 1:
-                    perimeter -= 1
                 if i > 0 and grid[i - 1][j] == 1:
-                    perimeter -= 1
-                if i < len(grid) - 1 and grid[i + 1][j] == 1:
-                    perimeter -= 1
+                    perimeter -= 2
+                if j > 0 and grid[i][j - 1] == 1:
+                    perimeter -= 2
 
     return perimeter
